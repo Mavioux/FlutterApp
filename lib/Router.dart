@@ -6,11 +6,12 @@ import 'pages/UnknownPage.dart';
 import 'pages/authentication/AuthPage.dart';
 import 'pages/authentication/SsoScreen.dart';
 import 'pages/search/CoursePage.dart';
+import 'pages/settings/UpdateGrades.dart';
 
 class Router {
   static Route<PageRoute<Object>> generateRoute(
-      RouteSettings settings,
-      ) {
+    RouteSettings settings,
+  ) {
     final Object args = settings.arguments;
     switch (settings.name) {
       case '/':
@@ -33,6 +34,10 @@ class Router {
       case '/CoursePage':
         return CupertinoPageRoute<CupertinoPageRoute<void>>(
           builder: (_) => CoursePage(),
+        );
+      case '/update_grades':
+        return CupertinoPageRoute<CupertinoPageRoute<void>>(
+          builder: (_) => UpdateGrades(),
         );
     }
     return CupertinoPageRoute<CupertinoPageRoute<void>>(
