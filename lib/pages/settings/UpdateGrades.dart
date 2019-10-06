@@ -1,8 +1,8 @@
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-// import 'package:flutter_uploader/flutter_uploader.dart';
+import 'package:flutter_uploader/flutter_uploader.dart';
 import 'package:grade_plus_plus/pages/fragments/ExpandableSection.dart';
 import 'package:grade_plus_plus/pages/fragments/TappableElement.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/services.dart';
 import '../AbstractPage.dart';
 
@@ -19,9 +19,9 @@ class UpdateGrades extends AbstractPage {
 }
 
 class _UpdateGradesState extends PageState<UpdateGrades> {
-  // final uploader = FlutterUploader();
+  final uploader = FlutterUploader();
   String _filePath;
-  // FileItem gradesPDF;
+  FileItem gradesPDF;
   final fileName = "Grade Pdf";
 
   Widget pathFinder() {
@@ -34,7 +34,7 @@ class _UpdateGradesState extends PageState<UpdateGrades> {
 
   void getFilePath() async {
     try {
-      String filePath = await FilePicker.getFilePath(type: FileType.PDF);
+      String filePath = await FilePicker.getFilePath(type: FileType.ANY);
       if (filePath == '') {
         return;
       }
@@ -70,20 +70,20 @@ class _UpdateGradesState extends PageState<UpdateGrades> {
         child: TappableElement(
           icon: Icons.file_upload,
           label: 'Upload your Grades',
-          onTap: null,
-          // onTap: uploader.enqueue(
-          //     url: "your upload link", //required: url to upload to
-          //     files: [
-          //       gradesPDF
-          //     ], // required: list of files that you want to upload
-          //     method: UploadMethod.POST, // HTTP method  (POST or PUT or PATCH)
-          //     headers: {"apikey": "api_123456", "userkey": "userkey_123456"},
-          //     data: {
-          //       "name": "john"
-          //     }, // any data you want to send in upload request
-          //     showNotification:
-          //         true, // send local notification (android only) for upload status
-          //     tag: "upload 1"), // unique tag for upload task
+          // onTap: null,
+          onTap: () => uploader.enqueue(
+              url: "your upload link", //required: url to upload to
+              files: [
+                gradesPDF
+              ], // required: list of files that you want to upload
+              method: UploadMethod.POST, // HTTP method  (POST or PUT or PATCH)
+              headers: {"apikey": "api_123456", "userkey": "userkey_123456"},
+              data: {
+                "name": "john"
+              }, // any data you want to send in upload request
+              showNotification:
+                  true, // send local notification (android only) for upload status
+              tag: "upload 1"), // unique tag for upload task
         ),
       ),
       Padding(
